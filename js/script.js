@@ -1,5 +1,4 @@
 
-
 let order = []
 let clickedOrder = [];
 let score = 0;
@@ -47,12 +46,15 @@ let checkOrder = () => {
         }
     }
     if (clickedOrder.length == order.length) {
-        alert(`Pontação:${score}\nVocê acertou! Iniciando próximo nível!`);
-
-        setTimeout(() => {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `Your score : ${score}`,
+            showConfirmButton: false,
+            timer: 1500
+        }, setTimeout(() => {
             nextLevel();
-        }, 1000)
-
+        }, 2500))
     }
 }
 
@@ -87,22 +89,34 @@ let nextLevel = () => {
 
 //função game over
 let gameOver = () => {
-    alert(`Pontuação : ${score}!\nVocê perdeu o jogo!\nClique em iniciar um novo jogo`);
-    order = [];
-    score = 0;
-    clickedOrder = [];
-    playGame();
+    // alert(`Pontuação : ${score}!\nVocê perdeu o jogo!\nClique em iniciar um novo jogo`);
+    Swal.fire({
+        title: 'Oh no!',
+        text: `Score : ${score}!`,
+        imageUrl: 'img/gameOver.jpg',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+    }, () => {
+        order = [];
+        score = 0;
+        clickedOrder = [];
+    })
 }
 
 //inicia o jogo
 let playGame = () => {
+    order = [];
+    score = 0;
+    clickedOrder = []; 
+
     Swal.fire({
-        title: 'Preparado?!',
-        imageUrl: 'img/letsGo.png',
-        imageWidth: 400,
-        imageHeight: 200,
+        title: 'COMEÇOU!!',
+        timer: 500,
+        icon: 'warning',
+        showConfirmButton: false,
         imageAlt: "lets'go",
-      })
+    })
     setTimeout(() => { nextLevel() }, 1000)
 }
 
@@ -112,4 +126,3 @@ red.onclick = () => click(1);
 yellow.onclick = () => click(2);
 blue.onclick = () => click(3);
 
-playGame();
