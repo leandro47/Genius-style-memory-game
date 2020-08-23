@@ -1,4 +1,4 @@
-const Swal = require('sweetalert2')
+
 
 let order = []
 let clickedOrder = [];
@@ -22,6 +22,7 @@ let shuffleOrder = () => {
 
     for (let i in order) {
         let elementColor = createColorElement(order[i]);
+        elementColor.classList.remove('selected');
         setTimeout(() => { lightColor(elementColor, Number(i) + 1); }, (Number(i) + 1) * 750)
     }
 }
@@ -34,7 +35,7 @@ let lightColor = (element, number) => {
 
     setTimeout(() => {
         element.classList.remove('selected');
-    }, number - 250)
+    }, number - 100)
 }
 
 //checa se os botoes clicados sao os mesmos da ordem gerada no jogo
@@ -95,7 +96,13 @@ let gameOver = () => {
 
 //inicia o jogo
 let playGame = () => {
-    Swal('Bem vindo ao Gênesis! Iniciando novo jogo!')
+    Swal.fire({
+        title: 'Preparado?!',
+        imageUrl: 'img/letsGo.png',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "lets'go",
+      })
     setTimeout(() => { nextLevel() }, 1000)
 }
 
