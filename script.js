@@ -1,3 +1,5 @@
+const Swal = require('sweetalert2')
+
 let order = []
 let clickedOrder = [];
 let score = 0;
@@ -20,7 +22,7 @@ let shuffleOrder = () => {
 
     for (let i in order) {
         let elementColor = createColorElement(order[i]);
-        setTimeout(() => { lightColor(elementColor, Number(i) + 1); }, (Number(i) + 1) * 500)
+        setTimeout(() => { lightColor(elementColor, Number(i) + 1); }, (Number(i) + 1) * 750)
     }
 }
 
@@ -45,6 +47,7 @@ let checkOrder = () => {
     }
     if (clickedOrder.length == order.length) {
         alert(`Pontação:${score}\nVocê acertou! Iniciando próximo nível!`);
+
         setTimeout(() => {
             nextLevel();
         }, 1000)
@@ -92,7 +95,7 @@ let gameOver = () => {
 
 //inicia o jogo
 let playGame = () => {
-    alert('Bem vindo ao Gênesis! Iniciando novo jogo!');
+    Swal('Bem vindo ao Gênesis! Iniciando novo jogo!')
     setTimeout(() => { nextLevel() }, 1000)
 }
 
