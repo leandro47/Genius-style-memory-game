@@ -20,23 +20,19 @@ let shuffleOrder = () => {
 
     for (let i in order) {
         let elementColor = createColorElement(order[i]);
-        lightColor(elementColor, Number(i) + 1);
+        setTimeout(() => { lightColor(elementColor, Number(i) + 1); }, (Number(i) + 1) * 500)
     }
 }
 
 //acende a proxima cor
 let lightColor = (element, number) => {
     number = number * 500;
-    let pro = new Promise((res, rej) => {
-        setTimeout(() => {
-            element.classList.remove('selected');
-            console.log('deligou')
-        }, number - 250);
-        res('ligou')
-    }).then((data) => {
-        element.classList.add('selected')
-        console.log('ligou')
-    })
+
+    element.classList.add('selected')
+
+    setTimeout(() => {
+        element.classList.remove('selected');
+    }, number - 250)
 }
 
 //checa se os botoes clicados sao os mesmos da ordem gerada no jogo
@@ -49,7 +45,10 @@ let checkOrder = () => {
     }
     if (clickedOrder.length == order.length) {
         alert(`Pontação:${score}\nVocê acertou! Iniciando próximo nível!`);
-        nextLevel();
+        setTimeout(() => {
+            nextLevel();
+        }, 1000)
+
     }
 }
 
@@ -94,8 +93,7 @@ let gameOver = () => {
 //inicia o jogo
 let playGame = () => {
     alert('Bem vindo ao Gênesis! Iniciando novo jogo!');
-
-    nextLevel();
+    setTimeout(() => { nextLevel() }, 1000)
 }
 
 // Eventos de click para as cores
